@@ -1,12 +1,7 @@
 import { getToken, getRefreshToken, setToken } from "@/utils/getTokenCookie";
 import axios from "axios";
 
-const isClient = typeof window !== "undefined";
-
-const BASE_URL =
-  isClient && (window.location.hostname === "localhost" || window.location.hostname === "vercel.app")
-    ? "https://ws.stage.cricap.com/api"
-    : "https://ws.cricap.com/api";
+const BASE_URL = "https://ws.stage.cricap.com/api"
 
 const client = axios.create({
   baseURL: BASE_URL,
@@ -64,7 +59,10 @@ client.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest._retry) {
+    if (
+      (error.response?.status === 401 || error.response?.status === 403) &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
 
       const newAccessToken = await refreshToken();

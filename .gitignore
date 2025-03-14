@@ -36,3 +36,4 @@ bitbucket-pipelines.yml
 *.tsbuildinfo
 next-env.d.ts
 farazbitbucket
+config.bat
