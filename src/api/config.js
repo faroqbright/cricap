@@ -2,7 +2,8 @@ import { getToken, getRefreshToken, setToken } from "@/utils/getTokenCookie";
 import axios from "axios";
 
 const BASE_URL =
-  typeof window !== "undefined" && window.location.hostname === "localhost"
+  typeof window !== "undefined" && window.location.hostname === "localhost" ||
+  window.location.hostname === "vercel.app"
     ? "https://ws.stage.cricap.com/api"
     : "https://ws.cricap.com/api";
 
